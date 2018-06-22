@@ -19,12 +19,30 @@
     </header>
     <main>
       <div class="inputSection">
+        <h3>Add Employee</h3>
         <input id="employeeFirstName" type="text" placeholder="First Name" />
         <input id="employeeLastName" type="text" placeholder="Last Name" />
         <input id="employeeId" type="text" placeholder="ID" />
         <input id="employeeTitle" type="text" placeholder="Title" />
         <input id="employeeSalary" type="text" placeholder="Annual Salary" />
-        <button id="submit"></button>
+        <button id="submit">Submit</button>
+      </div>
+      <div class="tableSection class=" table-responsive-md "">
+        <table class="table table-striped table-sm table-bordered">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Annual Salary</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTable">
+
+          </tbody>
+
+        </table>
       </div>
     </main>
   </div>
