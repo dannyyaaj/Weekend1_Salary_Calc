@@ -36,19 +36,16 @@ function start() {
   // renderEmployeeData()
   for (let employee of employees) {
     addRow(employee.employeeFirstName, employee.employeeLastName, employee.employeeId, employee.employeeTitle, employee.employeeSalary);
-  }
-  renderTotalMonthly()
-  handleEvents()
-  updateTotalMonthly()
+  };
 
+  handleEvents();
+  
   console.log('jQuery ready!');
-
-
-
 }
 
 function handleEvents() {
-  $('#submit').on('click', handleSubmit)
+  $('#submit').on('click', handleSubmit);
+  $('#submit').on('click', updateTotalMonthly);
 }
 
 function handleSubmit() {
@@ -57,17 +54,22 @@ function handleSubmit() {
   let lName = $('#employeeLastName').val();
   let id = $('#employeeId').val();
   let title = $('#employeeTitle').val();
-  let salary = parseInt($('#employeeSalary').val());
+  let salary = parseInt(`${$(('#employeeSalary').toLocaleString('en')).val()}`);
+
 
   // initialize new employee object from input fields and push it into array
   let newEmployee = new Employee(fName, lName, id, title, salary);
-  employees.push(newEmployee);
 
-  // render new employee rows
-  addRow(newEmployee.fName, newEmployee.lName, newEmployee.id, newEmployee.title, newEmployee.salary);
+  if (fName == '' || lName == '' || id == '' || title == '' || salary == '') {
+    return alert('Please complete all fields.');
+  } else {
 
-  // renders current monthly salary
-  renderTotalMonthly();
+    employees.push(newEmployee);
+
+    // render new employee rows
+    addRow(newEmployee.employeeFirstName, newEmployee.employeeLastName, newEmployee.employeeId, newEmployee.employeeTitle, newEmployee.employeeSalary);
+  }
+
 
   // reset inputs
   $('#employeeFirstName').val('');
@@ -80,6 +82,7 @@ function handleSubmit() {
 // function add rows of new eployees
 function addRow(fName, lName, id, title, salary) {
   let $newRow = $('<tr></tr>');
+
   // add new table row and display input fields as values
   $newRow.append(`<td>${fName}</td>`);
   $newRow.append(`<td>${lName}</td>`);
@@ -87,16 +90,21 @@ function addRow(fName, lName, id, title, salary) {
   $newRow.append(`<td>${title}</td>`);
   $newRow.append(`<td>$${salary.toLocaleString('en')}</td>`);
   $('#employeeTable').append($newRow);
+  // renderTotalMonthly();
 }
 
 function renderTotalMonthly() {
   for (let i = 0; i < employees.length; i++) {
     totalMonthly += ((employees[i].employeeSalary) / 12);
+    console.log(employees[i].employeeSalary);
   } // end of looping through employees object
+  $('#totalMonthly').text(`$${totalMonthly.toFixed(2)}`)
 }
 
 // update total monthly salary
 function updateTotalMonthly() {
+
+  totalMonthly += (employees[employees.length - 1].employeeSalary) / 12
   // Changes total monthly to red if amount is over $15,000
   totalMonthly >= 15000 ? $('#totalMonthly').toggleClass('fontRed') : null;
 
@@ -105,4 +113,5 @@ function updateTotalMonthly() {
 
   // Insert total monthly salary into span
   $('#totalMonthly').text(`$${newTotalMonthly}`);
+
 }
