@@ -45,6 +45,7 @@ function start() {
 function handleEvents() {
   $('#submit').on('click', handleSubmit);
   $('#submit').on('click', updateTotalMonthly);
+  $('.deleteBtn').on('click', handleDeleteButton);
 }
 
 function handleSubmit() {
@@ -87,6 +88,7 @@ function addRow(fName, lName, id, title, salary) {
   $newRow.append(`<td>${id}</td>`);
   $newRow.append(`<td>${title}</td>`);
   $newRow.append(`<td>$${salary.toLocaleString('en')}</td>`);
+  $newRow.append(`<td><button class='deleteBtn'>Delete</button></td>`);
   $('#employeeTable').append($newRow);
   // renderTotalMonthly();
 }
@@ -94,21 +96,27 @@ function addRow(fName, lName, id, title, salary) {
 function renderTotalMonthly() {
   for (let i = 0; i < employees.length; i++) {
     totalMonthly += ((employees[i].employeeSalary) / 12);
-  } // end of looping through employees object
+  }
+
+  // end of looping through employees object
   $('#totalMonthly').text(`$${totalMonthly.toFixed(2)}`)
 }
 
 // update total monthly salary
 function updateTotalMonthly() {
-  
+
   totalMonthly += (employees[employees.length - 1].employeeSalary) / 12
   // Changes total monthly to red if amount is over $15,000
 
   totalMonthly >= 15000 ? $('#totalMonthly').toggleClass('fontRed') : null;
 
   // Rounds total monthly salary and adds comma to number
-  let newTotalMonthly = Math.round(totalMonthly).toLocaleString('en');
+  let newTotalMonthly = Math.round(totalMonthly);
 
   // Insert total monthly salary into span
-  $('#totalMonthly').text(`$${newTotalMonthly}`);
+  $('#totalMonthly').text(`$${newTotalMonthly.toFixed(2)}`);
+}
+
+function handleDeleteButton() {
+  $(this).closest('tr').remove();
 }
