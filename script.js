@@ -45,7 +45,7 @@ function start() {
 function handleEvents() {
   $('#submit').on('click', handleSubmit);
   $('#submit').on('click', updateTotalMonthly);
-  $('.deleteBtn').on('click', handleDeleteButton);
+  $('#employeeTable').on('click', '.deleteBtn', handleDeleteButton);
 }
 
 function handleSubmit() {
