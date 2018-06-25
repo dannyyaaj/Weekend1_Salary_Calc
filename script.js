@@ -88,7 +88,7 @@ function addRow(fName, lName, id, title, salary) {
   $newRow.append(`<td>${id}</td>`);
   $newRow.append(`<td>${title}</td>`);
   $newRow.append(`<td>$${salary.toLocaleString('en')}</td>`);
-  $newRow.append(`<td><button class='deleteBtn'>Delete</button></td>`);
+  $newRow.append(`<td><button class='deleteBtn' data-id=${id}>Delete</button></td>`);
   $('#employeeTable').append($newRow);
   // renderTotalMonthly();
 }
@@ -108,7 +108,7 @@ function updateTotalMonthly() {
   totalMonthly += (employees[employees.length - 1].employeeSalary) / 12
   // Changes total monthly to red if amount is over $15,000
 
-  totalMonthly >= 15000 ? $('#totalMonthly').toggleClass('fontRed') : null;
+  totalMonthly >= 20000 ? $('#totalMonthly').toggleClass('fontRed') : null;
 
   // Rounds total monthly salary and adds comma to number
   let newTotalMonthly = Math.round(totalMonthly);
@@ -119,4 +119,12 @@ function updateTotalMonthly() {
 
 function handleDeleteButton() {
   $(this).closest('tr').remove();
+  // console.log($(this).data());
+  // for (let i = 0; i < employees.length; i++) {
+  //   let employee = employees[i];
+  //   if (employee.employeeId == $(this).data()) {
+  //     employees.splice(i, 1);
+  //   }
+  // }
+  // console.log(employees);
 }
