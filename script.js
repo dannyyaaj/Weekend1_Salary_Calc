@@ -32,6 +32,8 @@ const employees = [{
 
 let totalMonthly = 0;
 
+// jQuery will run this function start on load
+
 function start() {
   // renderEmployeeData()
   for (let employee of employees) {
@@ -119,12 +121,10 @@ function updateTotalMonthly() {
 
 function handleDeleteButton() {
   $(this).closest('tr').remove();
-  // console.log($(this).data());
-  // for (let i = 0; i < employees.length; i++) {
-  //   let employee = employees[i];
-  //   if (employee.employeeId == $(this).data()) {
-  //     employees.splice(i, 1);
-  //   }
-  // }
-  // console.log(employees);
+  for (let i = 0; i < employees.length; i++) {
+    let employee = employees[i];
+    if (employee.employeeId == $(this).data().id) {
+      employees.splice(i, 1);
+    }
+  }
 }

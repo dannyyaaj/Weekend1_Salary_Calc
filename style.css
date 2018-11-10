@@ -41,5 +41,6 @@ table {
 }
 
 .fontRed {
-  background: red;
+  color: red;
+  font-weight: bold;
 }
